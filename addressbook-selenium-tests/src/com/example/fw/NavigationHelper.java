@@ -20,4 +20,7 @@ public class NavigationHelper extends HelperBase {
 		manager.driver.get(manager.baseUrl + "/addressbookv4.1.4/");
 	}
 
+	public void returnToMainPage() {
+		openMainPage();
+	}
 }

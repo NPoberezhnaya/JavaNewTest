@@ -14,12 +14,13 @@ public abstract class HelperBase {
 	protected WebDriver driver;
 	String baseUrl;
 	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();
+	
+
 	public HelperBase(ApplicationManager manager) {
 		this.manager = manager;
 		this.driver = manager.driver;
 	};
-	
+
 	public boolean isElementPresent(By by) {
 		try {
 			driver.findElement(by);
@@ -54,15 +55,19 @@ public abstract class HelperBase {
 	}
 
 	protected void type(By locator, String text) {
-		driver.findElement(locator).clear();
-		driver.findElement(locator).sendKeys(text);
+		if (text != null) {
+			driver.findElement(locator).clear();
+			driver.findElement(locator).sendKeys(text);
+		}
 	}
 
 	protected void click(By locator) {
 		driver.findElement(locator).click();
 	}
+
 	protected void selectByText(By locator, String text) {
-		new Select(driver.findElement(locator))
-				.selectByVisibleText(text);
+		if (text != null) {
+			new Select(driver.findElement(locator)).selectByVisibleText(text);
+		}
 	}
 }

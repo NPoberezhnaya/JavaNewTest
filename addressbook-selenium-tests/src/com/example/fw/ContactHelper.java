@@ -1,10 +1,8 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
 
 import com.example.tests.ContactData;
-import com.example.tests.TestBase;
 
 public class ContactHelper extends HelperBase {
 
@@ -13,11 +11,21 @@ public class ContactHelper extends HelperBase {
 
 	}
 
+	public void initContactModification(int i) {
+		SelectContactByIndex(i);
+
+	}
+
+	private void SelectContactByIndex(int i) {
+		click(By.cssSelector("[name='entry']:nth-of-type("+i+") [title='Edit']"));
+	}
+
 	public void initContactCreation() {
 		click(By.linkText("add new"));
 	}
 
 	public void fillContactForm(ContactData contact) {
+	
 		type(By.name("firstname"), contact.firstName);
 		type(By.name("lastname"), contact.lastName);
 		type(By.name("address"), contact.address);
@@ -27,24 +35,30 @@ public class ContactHelper extends HelperBase {
 		type(By.name("email"), contact.email);
 		type(By.name("email2"), contact.email2);
 
-		
 		selectByText(By.name("bday"), contact.bday);
 		selectByText(By.name("bmonth"), contact.bmonth);
-		
 
-		
 		type(By.name("byear"), contact.byear);
-		//selectByText(By.name("new_group"), contact.newGroup);
-		
+		selectByText(By.name("new_group"), contact.newGroup);
 
 		type(By.name("address2"), contact.address2);
 		type(By.name("phone2"), contact.phone2);
 
 	}
 
+	public void sumbitContactModification() {
+		click(By.cssSelector("[value='Update']"));
+	}
 	
-
+	public void sumbitContactRemoval() {
+		click(By.cssSelector("[value='Delete']"));
+	}
+	
 	public void sumbitContactCreation() {
 		click(By.name("submit"));
+	}
+///////////////////////
+	public void deleteContact(int i) {
+		sumbitContactRemoval();
 	}
 }
