@@ -1,9 +1,12 @@
 package com.example.tests;
 
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertEquals;
+
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.testng.annotations.Test;
 
@@ -16,13 +19,15 @@ public void deleteSomeGroup(){
 	//save old state
 	List<GroupData> oldList = app.getGroupHelper().getGroups();
 	//actions
-	app.getGroupHelper().deleteGroup(0);
+	Random rnd = new Random();
+	int index = rnd.nextInt(oldList.size()-1);
+	app.getGroupHelper().deleteGroup(index);
 	app.getNavigationHelper().returnToGroupPage();
 	//save new state
 	List<GroupData> newList = app.getGroupHelper().getGroups();
 	//compare
 	
-	oldList.remove(0);
+	oldList.remove(index);
 	Collections.sort(oldList);
 	assertEquals(newList, oldList);
 }
