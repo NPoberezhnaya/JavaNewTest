@@ -13,9 +13,10 @@ import org.testng.annotations.DataProvider;
 import com.example.fw.ApplicationManager;
 import com.google.common.base.CaseFormat;
 
-public class TestBase {
+public class TestBase  {
 
 	public ApplicationManager app;
+	private String name;
 
 	@BeforeTest
 	public void setUp() throws Exception {
@@ -36,14 +37,18 @@ public class TestBase {
 
 		for (int i = 0; i < 5; i++) {
 			GroupData group = new GroupData();
-			group.name = generateRandomString();
-
-			group.header = generateRandomString();
-			group.footer = generateRandomString();
+			.withName( generateRandomString());
+			.withHeader(generateRandomString());
+			.withFooter( generateRandomString());
+		
 			list.add(new Object[] { group });
 		}
 		return list.iterator();
 	}
+
+	
+
+
 
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
@@ -52,6 +57,7 @@ public class TestBase {
 		
 		for (int i = 0; i < 5; i++) {
 			ContactData contact = new ContactData();
+			
 			contact.lastName = generateRandomString();
 
 			contact.firstName = generateRandomString();

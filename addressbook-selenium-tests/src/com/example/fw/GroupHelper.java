@@ -57,10 +57,11 @@ public class GroupHelper extends HelperBase {
 		List<WebElement> checkboxes = driver
 				.findElements(By.name("selected[]"));
 		for (WebElement checkbox : checkboxes) {
-			GroupData group = new GroupData();
+			
 			String title = checkbox.getAttribute("title");
 			group.name = title.substring("Select (".length(), title.length()
 					- ")".length());
+			GroupData group = new GroupData();
 			groups.add(group);
 		}
 
