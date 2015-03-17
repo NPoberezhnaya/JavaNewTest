@@ -1,6 +1,6 @@
 package com.example.tests;
 
-public class ContactData implements Comparable<ContactData>{
+public class ContactData implements Comparable<ContactData> {
 	public String firstName;
 	public String lastName;
 	public String address;
@@ -40,29 +40,86 @@ public class ContactData implements Comparable<ContactData>{
 
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContactData other = (ContactData) obj;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		return true;
-	}
 
 	@Override
 	public int compareTo(ContactData other) {
-		
-			return this.lastName.toLowerCase().compareTo(other.lastName.toLowerCase());
-		
-		
+
+		return this.lastName.toLowerCase().compareTo(
+				other.lastName.toLowerCase());
 
 	}
+
+	public ContactData withName(String name) {
+		this.lastName = name;
+		return this;
+	}
+
+	public ContactData withFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
+
+	public ContactData withAddress(String address) {
+		this.address = address;
+		return this;
+	}
+
+	public ContactData withHomePhone(String homePhone) {
+		this.homePhone = homePhone;
+		return this;
+	}
+
+	public ContactData withMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+		return this;
+
+	}
+
+	public ContactData withWorkPhone(String workPhone) {
+		this.workPhone = workPhone;
+		return this;
+
+	}
+
+	public ContactData withEmail(String email) {
+		this.email = email;
+		return this;
+
+	}
+
+	public ContactData withEmail2(String email2) {
+		this.email2 = email2;
+		return this;
+	}
+
+	public ContactData withBday(String bday) {
+		this.bday = bday;
+		return this;
+	}
+
+	public ContactData withBmonth(String bmonth) {
+		this.bmonth = bmonth;
+		return this;
+	}
+
+	public ContactData withByear(String byear) {
+		this.byear = byear;
+		return this;
+	}
+
+	public ContactData withNewGroup(String newGroup) {
+		this.newGroup = newGroup;
+		return this;
+	}
+
+	public ContactData withAddress2(String address2) {
+		this.address2 = address2;
+		return this;
+	}
+
+	public ContactData withPhone2(String phone2) {
+		this.phone2 = phone2;
+		return this;
+	}
+
 }

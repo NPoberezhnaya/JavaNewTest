@@ -17,7 +17,7 @@ public class GroupData implements Comparable<GroupData> {
 
 	@Override
 	public String toString() {
-		return "GroupData [name=" + name + ", header=" + header + ", footer="
+		return "GroupData [name=" + getName() + ", header=" + header + ", footer="
 				+ footer + "]";
 	}
 
@@ -32,10 +32,10 @@ public class GroupData implements Comparable<GroupData> {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupData other = (GroupData) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (getName() == null) {
+			if (other.getName() != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!getName().equals(other.getName()))
 			return false;
 		return true;
 	}
@@ -43,7 +43,7 @@ public class GroupData implements Comparable<GroupData> {
 	@Override
 	public int compareTo(GroupData other) {
 		
-			return this.name.toLowerCase().compareTo(other.name.toLowerCase());
+			return this.getName().toLowerCase().compareTo(other.getName().toLowerCase());
 		
 		
 
@@ -60,9 +60,23 @@ public class GroupData implements Comparable<GroupData> {
 		
 	}
 	
-	public GroupData withFooter(String generateRandomString) {
+	public GroupData withFooter(String footer) {
 		this.footer = footer;
 		return this;
 		
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getHeader() {
+		return header;
+	}
+
+	public String getFooter() {
+		return footer;
+	}
+
+	
 }

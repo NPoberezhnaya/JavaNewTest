@@ -8,19 +8,40 @@ public class NavigationHelper extends HelperBase {
 		super(manager);
 	}
 
-	public void goToGroupPage() {
-		click(By.linkText("groups"));
-		
+	public void groupsPage() {
+		if (!onGroupsPage()) {
+			click(By.linkText("groups"));
+		}
+
 	}
+
+	private boolean onGroupsPage() {
+		if (driver.getCurrentUrl().contains("/group.php")
+				&& driver.findElements(By.name("new")).size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 	public void returnToGroupPage() {
 		click(By.linkText("groups"));
 	}
 
-	public void openMainPage() {
-		manager.driver.get(manager.baseUrl + "/addressbookv4.1.4/");
+	public void mainPage() {
+		if (! onMainPage()) {
+			driver.get(manager.baseUrl + "/addressbookv4.1.4/");
+			click(By.linkText("home"));
+		}
+	}
+
+	private boolean onMainPage() {
+		
+		return driver.findElements(By.id("maintable")).size() > 0;
 	}
 
 	public void returnToMainPage() {
-		openMainPage();
+		mainPage();
 	}
 }
