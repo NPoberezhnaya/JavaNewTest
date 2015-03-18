@@ -1,38 +1,33 @@
 package com.example.tests;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.testng.Assert.assertEquals;
-
-
-
-
 
 import org.testng.annotations.Test;
 
 import com.example.utils.SortedListOf;
 
-
-
 public class ContactCreationTest extends TestBase {
 
-	@Test 	(dataProvider = "randomValidContactGenerator")
+	@Test(dataProvider = "randomValidContactGenerator")
 	public void testContactCreationWithValidData(ContactData contact)
-	
-			throws Exception {
+
+	throws Exception {
 
 		// save old state
 		SortedListOf<ContactData> oldList = app.getContactHelper()
-			.getContacts();
+				.getContacts();
 
 		// actions
-	app.getContactHelper().createContact(contact);
+		app.getContactHelper().createContact(contact);
 
 		// save new state
-	SortedListOf<ContactData> newList = app.getContactHelper()
-		.getContacts();
+		SortedListOf<ContactData> newList = app.getContactHelper()
+				.getContacts();
 
 		// compare
-	oldList.add(contact);
-	//assertEquals(oldList, newList);
+		assertThat(newList, equalTo(oldList.withAdded(contact)));
 
 	}
 

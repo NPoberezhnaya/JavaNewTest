@@ -1,5 +1,7 @@
 package com.example.tests;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Random;
@@ -24,9 +26,8 @@ public class ContactModificationTests extends TestBase {
 		SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 		
 		// compare
-		oldList.remove(index);
-		oldList.add(contact);
-		assertEquals(oldList, newList);
+		assertThat(newList, equalTo(oldList.without(index).withAdded(contact)));
+	
 
 	}
 }

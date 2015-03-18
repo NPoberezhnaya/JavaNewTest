@@ -15,15 +15,9 @@ public class GroupHelper extends HelperBase {
 	}
 
 	public GroupHelper modifyGroup(int index, GroupData group) {
-		returnToGroupPage();
-		initGroupModification(index);
-		fillGroupForm(group);
-		submitGroupModification();
-		returnToGroupPage();
-		rebuildCash();
+		returnToGroupPage().initGroupModification(index).fillGroupForm(group)
+				.submitGroupModification().returnToGroupPage().rebuildCash();
 		return this;
-		
-	
 
 	}
 
@@ -37,7 +31,7 @@ public class GroupHelper extends HelperBase {
 	}
 
 	private void rebuildCash() {
-		 cashedGroups = new SortedListOf<GroupData>();
+		cashedGroups = new SortedListOf<GroupData>();
 		manager.navigateTo().groupsPage();
 		List<WebElement> checkboxes = driver
 				.findElements(By.name("selected[]"));
@@ -53,28 +47,23 @@ public class GroupHelper extends HelperBase {
 	}
 
 	public GroupHelper createGroup(GroupData group) {
-		manager.navigateTo().groupsPage();
-		initGroupCreation();
-		fillGroupForm(group);
-		sumbitGroupCreation();
-		returnToGroupPage();
-		rebuildCash();
+		returnToGroupPage().initGroupCreation().fillGroupForm(group)
+				.sumbitGroupCreation().returnToGroupPage().rebuildCash();
 		return this;
 
 	}
 
 	public GroupHelper deleteGroup(int i) {
-		SelectGroupByIndex(i);
-		submitGroupDeletion();
-		returnToGroupPage();
-		rebuildCash();
-				return this;
+		SelectGroupByIndex(i).submitGroupDeletion().returnToGroupPage()
+				.rebuildCash();
+		return this;
 
 	}
 
-	private void submitGroupDeletion() {
+	private GroupHelper submitGroupDeletion() {
 		click(By.name("delete"));
 		cashedGroups = null;
+		return this;
 	}
 
 	public GroupHelper initGroupCreation() {
@@ -100,7 +89,7 @@ public class GroupHelper extends HelperBase {
 	public GroupHelper initGroupModification(int i) {
 		SelectGroupByIndex(i);
 		click(By.name("edit"));
-	
+
 		return this;
 
 	}
@@ -122,6 +111,5 @@ public class GroupHelper extends HelperBase {
 		click(By.linkText("groups"));
 		return this;
 	}
-
 
 }

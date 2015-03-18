@@ -58,6 +58,8 @@ public class SortedListOf<T extends Comparable<T>> extends ForwardingList<T> {
     newItems.list.remove(item);
     return newItems;
   }
+  
+
 
   public SortedListOf<T> without(int index) {
     SortedListOf<T> newItems = new SortedListOf<T>();

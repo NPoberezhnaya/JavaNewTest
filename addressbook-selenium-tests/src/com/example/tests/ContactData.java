@@ -40,13 +40,29 @@ public class ContactData implements Comparable<ContactData> {
 
 	}
 
-
 	@Override
 	public int compareTo(ContactData other) {
 
 		return this.lastName.toLowerCase().compareTo(
 				other.lastName.toLowerCase());
 
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ContactData other = (ContactData) obj;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		return true;
 	}
 
 	public ContactData withName(String name) {

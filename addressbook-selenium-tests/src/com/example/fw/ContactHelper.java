@@ -70,7 +70,7 @@ public class ContactHelper extends HelperBase {
 
 	public ContactHelper sumbitContactModification() {
 		click(By.cssSelector("[value='Update']"));
-	cashedContacts = null;
+		cashedContacts = null;
 		return this;
 	}
 
@@ -127,12 +127,8 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public ContactHelper createContact(ContactData contact) {
-		openMainPage();
-		initContactCreation();
-		fillContactForm(contact, CREATION);
-		sumbitContactCreation();
-
-		rebuildCash();
+		openMainPage().initContactCreation().fillContactForm(contact, CREATION)
+				.sumbitContactCreation().rebuildCash();
 
 		return this;
 
@@ -141,14 +137,8 @@ public class ContactHelper extends HelperBase {
 	public ContactHelper modifyContact(int index, ContactData contact) {
 		openMainPage();
 		initContactModification(index).fillContactForm(contact, MODIFICATION)
-				.sumbitContactModification();
-		openMainPage();
-		rebuildCash();
+				.sumbitContactModification().openMainPage().rebuildCash();
 		return this;
 
-	
-		
-		
-		
 	}
 }
