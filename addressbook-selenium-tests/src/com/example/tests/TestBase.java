@@ -11,11 +11,11 @@ import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
 
+import static com.example.tests.GroupDataGenerator.generateRandomGroups;
 
-public class TestBase  {
+public class TestBase {
 
 	public ApplicationManager app;
-
 
 	@BeforeTest
 	public void setUp() throws Exception {
@@ -31,50 +31,44 @@ public class TestBase  {
 
 	@DataProvider
 	public Iterator<Object[]> randomValidGroupGenerator() {
-		List<Object[]> list = new ArrayList<Object[]>();
-		//
-
-		for (int i = 0; i < 5; i++) {
-			GroupData group = new GroupData()
-			.withName( generateRandomString())
-			.withHeader(generateRandomString())
-			.withFooter( generateRandomString());
-		
-			list.add(new Object[] { group });
-		}
-		return list.iterator();
+	
+		return wrapGroupsForDataProvider(generateRandomGroups(5)).iterator();
 	}
 
-	
-
-
+	public static List<Object[]> wrapGroupsForDataProvider(List<GroupData> groups) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (GroupData group : groups) {
+			list.add(new Object[] {group});
+		}
+		return list;
+	}
 
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
 		//
-		
+
 		for (int i = 0; i < 5; i++) {
 			ContactData contact = new ContactData();
-			
+
 			contact.lastName = generateRandomString();
 
 			contact.firstName = generateRandomString();
-		
-			contact.address = "Deribasovskay street, "+generateRandomNumber();
-			contact.address2 = "Deribasovskay street, "+generateRandomNumber();
+
+			contact.address = "Deribasovskay street, " + generateRandomNumber();
+			contact.address2 = "Deribasovskay street, "
+					+ generateRandomNumber();
 			contact.bday = generateRandomBDay();
 			contact.bmonth = generateRandomMonth();
 			contact.byear = generateRandomYear();
 			contact.email = generateRandomMail();
-			contact.email2 =generateRandomMail();
+			contact.email2 = generateRandomMail();
 			contact.homePhone = generatePhoneNumberNumber();
 			contact.mobilePhone = generateMobilePhoneNumberNumber();
-			//contact.newGroup = "[none]";
-			contact.phone2 =  generatePhoneNumberNumber();
-			contact.workPhone =  generatePhoneNumberNumber();
-			
-		
+			// contact.newGroup = "[none]";
+			contact.phone2 = generatePhoneNumberNumber();
+			contact.workPhone = generatePhoneNumberNumber();
+
 			list.add(new Object[] { contact });
 		}
 		return list.iterator();
@@ -85,15 +79,16 @@ public class TestBase  {
 		if (rnd.nextInt(3) == 0) {
 			return "-";
 		} else {
-			return "" + (1+rnd.nextInt(30));
+			return "" + (1 + rnd.nextInt(30));
 		}
 	}
 
+	// should be deleted
 	public String generateRandomString() {
 		Random rnd = new Random();
-		
-			return "test" + rnd.nextInt(60);
-		
+
+		return "test" + rnd.nextInt(60);
+
 	}
 
 	public String generateMobilePhoneNumberNumber() {
@@ -104,8 +99,9 @@ public class TestBase  {
 		} else {
 			res += rnd.nextInt(999999);
 		}
-		return "0"+res.toString();
+		return "0" + res.toString();
 	}
+
 	public String generatePhoneNumberNumber() {
 		Random rnd = new Random();
 		Integer res = 71900000;
@@ -116,6 +112,7 @@ public class TestBase  {
 		}
 		return res.toString();
 	}
+
 	public String generateRandomNumber() {
 		Random rnd = new Random();
 		if (rnd.nextInt(3) == 0) {
@@ -124,33 +121,36 @@ public class TestBase  {
 			return "" + rnd.nextInt(2015);
 		}
 	}
+
 	public String generateRandomMail() {
 		Random rnd = new Random();
 		if (rnd.nextInt(3) == 0) {
 			return "";
 		} else {
-			return "test" + rnd.nextInt(2015)+"@uklr.net";
+			return "test" + rnd.nextInt(2015) + "@uklr.net";
 		}
 	}
+
 	public String generateRandomYear() {
 		Random rnd = new Random();
 		if (rnd.nextInt(3) == 0) {
 			return "";
 		} else {
 			Integer res = 1950 + rnd.nextInt(65);
-			
+
 			return res.toString();
 		}
 	}
+
 	public String generateRandomMonth() {
 		Random rnd = new Random();
 		int month;
 		if (rnd.nextInt(3) == 0) {
 			return "-";
 		} else {
-			month =  1 + rnd.nextInt(12);
+			month = 1 + rnd.nextInt(12);
 		}
-		String res= "";
+		String res = "";
 		switch (month) {
 		case 1:
 			res = "January";
@@ -188,11 +188,11 @@ public class TestBase  {
 		case 12:
 			res = "December";
 			break;
-		
+
 		default:
 			break;
 		}
-		
+
 		return res;
 	}
 
