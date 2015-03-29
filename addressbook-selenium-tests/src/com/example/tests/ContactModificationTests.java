@@ -2,6 +2,7 @@ package com.example.tests;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 import java.util.Random;
 
