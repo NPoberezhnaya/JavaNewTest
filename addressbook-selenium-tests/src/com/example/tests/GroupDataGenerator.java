@@ -60,8 +60,6 @@ public class GroupDataGenerator {
 		return list;
 	}
 
-	
-
 	private static void saveGroupsToCsvFile(List<GroupData> groups, File file)
 			throws IOException {
 		FileWriter writer = new FileWriter(file);

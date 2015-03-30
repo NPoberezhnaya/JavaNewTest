@@ -16,10 +16,10 @@ import com.example.utils.SortedListOf;
 public class GroupCreationTests extends TestBase {
 	@DataProvider
 	public Iterator<Object[]> groupsFromFile() throws IOException {
-	
-		return wrapGroupsForDataProvider(loadGroupsFromXmlFile(new File ("groups.xml"))).iterator();
+
+		return wrapGroupsForDataProvider(
+				loadGroupsFromXmlFile(new File("groups.xml"))).iterator();
 	}
-	
 
 	@Test(dataProvider = "groupsFromFile")
 	public void testGroupCreationWithValidData(GroupData group)
@@ -34,7 +34,7 @@ public class GroupCreationTests extends TestBase {
 		SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
 
 		// compare states
-	
+
 		assertThat(newList, equalTo(oldList.withAdded(group)));
 
 	}

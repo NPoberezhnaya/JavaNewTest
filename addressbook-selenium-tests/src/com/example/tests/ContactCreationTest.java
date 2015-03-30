@@ -1,7 +1,7 @@
 package com.example.tests;
 
 import static com.example.tests.ContactDataGenerator.loadContactsFromXmlFile;
-import static com.example.tests.GroupDataGenerator.loadGroupsFromXmlFile;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 

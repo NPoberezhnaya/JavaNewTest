@@ -68,16 +68,13 @@ public class ContactDataGenerator {
 		return (List<ContactData>) xstream.fromXML(file);
 	}
 
-	
-	
-	
 	private static void saveContactsToCsvFile(List<ContactData> contacts,
 			File file) throws IOException {
 		FileWriter writer = new FileWriter(file);
 		for (ContactData contact : contacts) {
 			writer.write(contact.getFirstName() + "," + contact.getLastName()
 					+ "," + contact.getEmail() + "," + contact.getHomePhone()
-					
+
 					+ contact.getAddress() + "," + contact.getAddress2() + ","
 					+ contact.getBday() + "," + contact.getBmonth() + ","
 					+ contact.getByear() + "," + contact.getEmail2() + ","
@@ -111,7 +108,7 @@ public class ContactDataGenerator {
 					.withAddress2(generateRandomString())
 					.withBday(generateRandomBDay())
 					.withBmonth(generateRandomMonth())
-					.withByear( generateRandomYear())
+					.withByear(generateRandomYear())
 					.withEmail2(generateRandomMail())
 					.withMobilePhone(generateMobilePhoneNumberNumber())
 					.withNewGroup(generateRandomString())
@@ -129,6 +126,7 @@ public class ContactDataGenerator {
 		return "test" + rnd.nextInt(60);
 
 	}
+
 	private static String generateRandomBDay() {
 		Random rnd = new Random();
 		if (rnd.nextInt(3) == 0) {
@@ -137,8 +135,6 @@ public class ContactDataGenerator {
 			return "" + (1 + rnd.nextInt(30));
 		}
 	}
-
-	
 
 	public static String generateMobilePhoneNumberNumber() {
 		Random rnd = new Random();
@@ -194,9 +190,9 @@ public class ContactDataGenerator {
 	public static String generateRandomMonth() {
 		Random rnd = new Random();
 		int month;
-		
-			month = 1 + rnd.nextInt(12);
-	
+
+		month = 1 + rnd.nextInt(12);
+
 		String res = "";
 		switch (month) {
 		case 1:
