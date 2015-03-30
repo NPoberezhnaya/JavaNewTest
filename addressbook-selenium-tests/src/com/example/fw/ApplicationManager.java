@@ -30,7 +30,7 @@ public class ApplicationManager {
 		//driver = new FirefoxDriver();
 		baseUrl = properties.getProperty(baseUrl);
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(baseUrl + "/addressbookv4.1.4/");
+		driver.get(baseUrl);
 	}
 
 	public void stop() {
