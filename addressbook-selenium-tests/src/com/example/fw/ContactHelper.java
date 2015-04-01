@@ -122,7 +122,7 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public ContactHelper openMainPage() {
-		manager.driver.get(manager.baseUrl + "/addressbookv4.1.4/");
+		manager.driver.get(manager.baseUrl);
 		return this;
 	}
 

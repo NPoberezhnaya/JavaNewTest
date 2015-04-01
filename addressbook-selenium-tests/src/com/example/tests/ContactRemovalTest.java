@@ -32,5 +32,6 @@ public class ContactRemovalTest extends TestBase {
 		assertThat(newList, equalTo(oldList.without(index)));
 
 	}
+	
 
 }

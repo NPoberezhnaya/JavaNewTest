@@ -28,7 +28,7 @@ public class ApplicationManager {
 		}
 
 		//driver = new FirefoxDriver();
-		baseUrl = properties.getProperty(baseUrl);
+		baseUrl = properties.getProperty("baseUrl");
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 	}
