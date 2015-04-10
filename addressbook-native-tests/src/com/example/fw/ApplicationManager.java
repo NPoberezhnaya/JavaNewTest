@@ -11,18 +11,20 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class ApplicationManager {
 	private static ApplicationManager singleton;
 	
-	WebDriver driver;
+
 
 
 	private Properties props;
 	private ContactHelper contactHelper;
+	private AutoItHelper autoItHelper;
+
 	private ProcessHelper processHelper;
 	
 	public ApplicationManager(Properties props) {
 		this.props = props;
 	}
 
-	public void stop() {
+	public void stop()  {
 		getProcessHelper().stopAppUnderTest();
 
 	}
@@ -54,6 +56,12 @@ public class ApplicationManager {
 		return processHelper;
 	}
 
+	public AutoItHelper getAutoItHelper() {
+		if (autoItHelper == null) {
+			autoItHelper = new AutoItHelper(this);
+		}
+		return autoItHelper;
+	}
 	
 	public static ApplicationManager getInstance(Properties props) throws IOException {
 		if (singleton == null) {
@@ -69,6 +77,8 @@ public class ApplicationManager {
 	public String getProperty(String key) {
 		return props.getProperty(key);
 	}
+
+	
 	
 
 	

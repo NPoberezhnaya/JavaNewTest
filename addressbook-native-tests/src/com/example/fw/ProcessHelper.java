@@ -3,8 +3,8 @@ package com.example.fw;
 import java.io.IOException;
 
 public class ProcessHelper extends HelperBase {
-	private Process exec;
-	private ApplicationManager manager;
+	private Process process;
+	
 
 	public ProcessHelper(ApplicationManager manager) {
 		super(manager);
@@ -12,12 +12,13 @@ public class ProcessHelper extends HelperBase {
 
 	public void startAppUnderTest() throws IOException {
 		String command = manager.getProperty("app.path");
-		//exec = Runtime.getRuntime().exec(command);
-		exec = Runtime.getRuntime().exec("D:/eclipse/eclipseLast/data/SSuiteAddressBookPro2/AddressBook.exe");
+		process = Runtime.getRuntime().exec(command);
+	
 	}
 
 	public void stopAppUnderTest() {
-		exec.destroy();
+		
+		process.destroy();
 	}
 
 }
