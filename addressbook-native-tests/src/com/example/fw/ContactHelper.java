@@ -75,5 +75,13 @@ public class ContactHelper extends HelperBase {
 				.click("TListView1").send("{DOWN} {SPACE} {DOWN} {SPACE}");
 
 	}
+	
+	public void exit() {
+		manager.getAutoItHelper()
+				.winWaitAndActivate("AddressBook Portable", "", 8000)
+				.click("Exit");
+
+	}
+	
 
 }
