@@ -1,7 +1,6 @@
 package com.example.tests;
 
 import static com.example.tests.ContactDataGenerator.loadContactsFromXmlFile;
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -29,19 +28,30 @@ public class ContactCreationTest extends TestBase {
 			throws Exception {
 
 		// save old state
-		SortedListOf<ContactData> oldList = app.getContactHelper()
-				.getContacts();
+		SortedListOf<ContactData> oldList = app.getModel().getContacts();
 
 		// actions
 		app.getContactHelper().createContact(contact);
 
 		// save new state
-		SortedListOf<ContactData> newList = app.getContactHelper()
-				.getContacts();
+		SortedListOf<ContactData> newList = app.getModel().getContacts();
 
 		// compare
 		assertThat(newList, equalTo(oldList.withAdded(contact)));
 
-	}
+		if (wantToCheck()) {
+			if ("yes".equals(app.getProperty("check.db"))) {
 
+				assertThat(app.getModel().getContacts(), equalTo(app
+						.getHibernateHelper().listContacts()));
+
+			}
+			if ("yes".equals(app.getProperty("check.ui"))) {
+
+				assertThat(app.getModel().getContacts(), equalTo(app
+						.getContactHelper().getUIContacts()));
+
+			}
+		}
+	}
 }

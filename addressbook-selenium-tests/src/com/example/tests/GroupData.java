@@ -1,11 +1,13 @@
 package com.example.tests;
 
 public class GroupData implements Comparable<GroupData> {
+	private String id;
 	private String name;
 	private String header;
 	private String footer;
 
-	public GroupData(String groupName, String header, String footer) {
+	public GroupData(String id, String groupName, String header, String footer) {
+		this.id = id;
 		this.name = groupName;
 		this.header = header;
 		this.footer = footer;
@@ -17,9 +19,10 @@ public class GroupData implements Comparable<GroupData> {
 
 	@Override
 	public String toString() {
-		return "GroupData [name=" + getName() + ", header=" + header
+		return "GroupData [id=" + getId() + "name=" + getName() + ", header=" + header
 				+ ", footer=" + footer + "]";
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -51,10 +54,34 @@ public class GroupData implements Comparable<GroupData> {
 		return this;
 	}
 
+	public GroupData withId(String name) {
+		this.id = id;
+		return this;
+	}
 	public GroupData withHeader(String header) {
 		this.header = header;
 		return this;
 
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
+	}
+
+	public void setFooter(String footer) {
+		this.footer = footer;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public GroupData withFooter(String footer) {

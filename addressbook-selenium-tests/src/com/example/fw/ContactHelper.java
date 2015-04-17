@@ -13,7 +13,7 @@ import com.example.tests.ContactData;
 import com.example.tests.GroupData;
 import com.example.utils.SortedListOf;
 
-public class ContactHelper extends HelperBase {
+public class ContactHelper extends WebDriverHelperBase {
 	public static boolean CREATION = true;
 	public static boolean MODIFICATION = false;
 
@@ -122,10 +122,27 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public ContactHelper openMainPage() {
-		manager.driver.get(manager.baseUrl);
+		manager.getDriver().get(manager.baseUrl);
 		return this;
 	}
+	public  SortedListOf<ContactData>  getUIContacts() {
+		SortedListOf<ContactData>  contacts = new SortedListOf<ContactData>();
+		manager.navigateTo().mainPage();
+		List<WebElement> checkboxes = driver
+				.findElements(By.name("selected[]"));
+		for (WebElement checkbox : checkboxes) {
 
+			String title = checkbox.getAttribute("title");
+			String name = title.substring("Select (".length(), title.length()
+					- ")".length());
+			System.out.println(name);
+			contacts.add(new ContactData().withFirstName(name));
+
+
+		}
+		return contacts;
+
+	}
 	public ContactHelper createContact(ContactData contact) {
 		openMainPage().initContactCreation().fillContactForm(contact, CREATION)
 				.sumbitContactCreation().rebuildCash();

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import com.example.tests.GroupData;
 import com.example.utils.SortedListOf;
 
-public class GroupHelper extends HelperBase {
+public class GroupHelper extends WebDriverHelperBase {
 
 	public GroupHelper(ApplicationManager manager) {
 		super(manager);
@@ -16,53 +16,32 @@ public class GroupHelper extends HelperBase {
 
 	public GroupHelper modifyGroup(int index, GroupData group) {
 		returnToGroupPage().initGroupModification(index).fillGroupForm(group)
-				.submitGroupModification().returnToGroupPage().rebuildCash();
+				.submitGroupModification().returnToGroupPage();
+		manager.getModel().removeGroup(index).addGroup(group);
 		return this;
-
-	}
-
-	private SortedListOf<GroupData> cashedGroups;
-
-	public SortedListOf<GroupData> getGroups() {
-		if (cashedGroups == null) {
-			rebuildCash();
-		}
-		return cashedGroups;
-	}
-
-	private void rebuildCash() {
-		cashedGroups = new SortedListOf<GroupData>();
-		manager.navigateTo().groupsPage();
-		List<WebElement> checkboxes = driver
-				.findElements(By.name("selected[]"));
-		for (WebElement checkbox : checkboxes) {
-
-			String title = checkbox.getAttribute("title");
-			String name = title.substring("Select (".length(), title.length()
-					- ")".length());
-
-			cashedGroups.add(new GroupData().withName(name));
-		}
 
 	}
 
 	public GroupHelper createGroup(GroupData group) {
 		returnToGroupPage().initGroupCreation().fillGroupForm(group)
-				.sumbitGroupCreation().returnToGroupPage().rebuildCash();
+				.sumbitGroupCreation().returnToGroupPage();
+		// update model
+		manager.getModel().addGroup(group);
+
 		return this;
 
 	}
 
-	public GroupHelper deleteGroup(int i) {
-		SelectGroupByIndex(i).submitGroupDeletion().returnToGroupPage()
-				.rebuildCash();
+	public GroupHelper deleteGroup(int index) {
+		SelectGroupByIndex(index).submitGroupDeletion().returnToGroupPage();
+		manager.getModel().removeGroup(index);
 		return this;
 
 	}
 
 	private GroupHelper submitGroupDeletion() {
 		click(By.name("delete"));
-		cashedGroups = null;
+
 		return this;
 	}
 
@@ -82,7 +61,7 @@ public class GroupHelper extends HelperBase {
 
 	public GroupHelper sumbitGroupCreation() {
 		click(By.name("submit"));
-		cashedGroups = null;
+
 		return this;
 	}
 
@@ -102,8 +81,25 @@ public class GroupHelper extends HelperBase {
 
 	public GroupHelper submitGroupModification() {
 		click(By.name("update"));
-		cashedGroups = null;
+
 		return this;
+
+	}
+
+	public SortedListOf<GroupData> getUIGroups() {
+		SortedListOf<GroupData> groups = new SortedListOf<GroupData>();
+		manager.navigateTo().groupsPage();
+		List<WebElement> checkboxes = driver
+				.findElements(By.name("selected[]"));
+		for (WebElement checkbox : checkboxes) {
+
+			String title = checkbox.getAttribute("title");
+			String name = title.substring("Select (".length(), title.length()
+					- ")".length());
+
+			groups.add(new GroupData().withName(name));
+		}
+		return groups;
 
 	}
 

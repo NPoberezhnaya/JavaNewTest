@@ -16,7 +16,7 @@ public class GroupRemovalTests extends TestBase {
 	public void deleteSomeGroup() {
 
 		// save old state
-		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> oldList = app.getModel().getGroups();
 
 		// actions
 		Random rnd = new Random();
@@ -24,10 +24,29 @@ public class GroupRemovalTests extends TestBase {
 		app.getGroupHelper().deleteGroup(index);
 
 		// save new state
-		SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> newList = app.getModel().getGroups();
 
 		// compare
 		assertThat(newList, equalTo(oldList.without(index)));
+		
+		///
+		if (wantToCheck()) {
+			if ("yes".equals(app.getProperty("check.db"))) {
+
+				assertThat(app.getModel().getGroups(), equalTo(app
+						.getHibernateHelper().listGroups()));
+
+			}
+			if ("yes".equals(app.getProperty("check.ui"))) {
+
+				assertThat(app.getModel().getGroups(), equalTo(app
+						.getGroupHelper().getUIGroups()));
+
+			}
+
+		}
+		
+		///
 
 	}
 

@@ -24,6 +24,7 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public Contact getFirstContact() {
+		
 		manager.getAutoItHelper()
 				.winWaitAndActivate("AddressBook Portable", "", 5000)
 				.click("TListView1").send("{DOWN} {SPACE}").click("Edit")
@@ -63,9 +64,9 @@ public class ContactHelper extends HelperBase {
 	}
 
 	private void deleteContactForm(Contact contact) {
-		manager.getAutoItHelper()
+		if (!manager.getAutoItHelper().winWaitAndActivate("AddressBook Portable", "", 8000).getText("TListView1").isEmpty()) {manager.getAutoItHelper()
 				.winWaitAndActivate("AddressBook Portable", "", 8000)
-				.click("Delete");
+				.click("Delete");}
 
 	}
 
