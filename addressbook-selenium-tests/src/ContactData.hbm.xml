@@ -2,20 +2,20 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
  <class name="com.example.tests.ContactData" table="contact_list">
-
- <property name="firstName" column="contact_firstName" />
- <property name="lastName" column="contact_lastName" />
- <property name="address" column="contact_address" />
-  <property name="phone2" column="contact_phone2" />
- <property name="homePhone" column="contact_homePhone" />
- <property name="mobilePhone" column="contact_mobilePhone" />
- <property name="workPhone" column="contact_workPhone" />
- <property name="email" column="contact_email" />
-  <property name="email2" column="contact_email2" />
- <property name="bday" column="contact_bday" />
- <property name="bmonth" column="contact_bmonth" />
- <property name="byear" column="contact_byear" />
- <property name="newGroup" column="contact_newGroup" />
- <property name="address2" column="contact_address2" />
+<property name="id" column="id" />
+ <property name="firstName" column="firstName" />
+ <property name="lastName" column="lastName" />
+ <property name="address" column="address" />
+  <property name="phone2" column="phone2" />
+ <property name="homePhone" column="home" />
+ <property name="mobilePhone" column="mobile" />
+ <property name="workPhone" column="work" />
+ <property name="email" column="email" />
+  <property name="email2" column="email2" />
+ <property name="bday" column="bday" />
+ <property name="bmonth" column="bmonth" />
+ <property name="byear" column="byear" />
+ <property name="newGroup" column="newGroup" />
+ <property name="address2" column="address2" />
  </class>
 </hibernate-mapping>
