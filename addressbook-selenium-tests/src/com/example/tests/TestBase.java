@@ -11,6 +11,8 @@ import java.util.Random;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.example.fw.ApplicationManager;
 
@@ -21,35 +23,40 @@ public class TestBase {
 
 	protected ApplicationManager app;
 	private int checkCounter;
-	private int checkFreguency;
+	private int checkFrequency;
 
 	@BeforeTest
+//	@Parameters({ "configFile" })
 	public void setUp() throws Exception {
-		String configFile = System.getProperty("configFile",
-				"application.properties");
-		
+		//if (configFile == null) {
+			String configFile = System.getProperty("configFile",
+					"application.properties");
+	//	}
+
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(configFile)));
+
 		app = new ApplicationManager(properties);
+	
 		checkCounter = 0;
-		checkFreguency = Integer.parseInt(properties.getProperty(
-				"check.freguency", "0"));
+		checkFrequency = Integer.parseInt(properties.getProperty(
+				"check.frequency", "0"));
 	}
 
-	protected boolean wantToCheck(){
-		checkCounter++;
-		if (checkCounter > checkFreguency){
-			checkCounter = 0;
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
 	@AfterTest
 	public void tearDown() throws Exception {
 		app.stop();
 
+	}
+
+	protected boolean wantToCheck() {
+		checkCounter++;
+		if (checkCounter > checkFrequency) {
+			checkCounter = 0;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@DataProvider

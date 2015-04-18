@@ -33,6 +33,7 @@ public class GroupHelper extends WebDriverHelperBase {
 	}
 
 	public GroupHelper deleteGroup(int index) {
+		manager.navigateTo().groupsPage();
 		SelectGroupByIndex(index).submitGroupDeletion().returnToGroupPage();
 		manager.getModel().removeGroup(index);
 		return this;
@@ -41,7 +42,6 @@ public class GroupHelper extends WebDriverHelperBase {
 
 	private GroupHelper submitGroupDeletion() {
 		click(By.name("delete"));
-
 		return this;
 	}
 
@@ -81,7 +81,6 @@ public class GroupHelper extends WebDriverHelperBase {
 
 	public GroupHelper submitGroupModification() {
 		click(By.name("update"));
-
 		return this;
 
 	}

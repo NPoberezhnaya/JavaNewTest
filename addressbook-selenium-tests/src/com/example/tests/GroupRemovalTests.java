@@ -27,9 +27,7 @@ public class GroupRemovalTests extends TestBase {
 		SortedListOf<GroupData> newList = app.getModel().getGroups();
 
 		// compare
-		assertThat(newList, equalTo(oldList.without(index)));
 		
-		///
 		if (wantToCheck()) {
 			if ("yes".equals(app.getProperty("check.db"))) {
 

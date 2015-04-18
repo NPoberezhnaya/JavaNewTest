@@ -11,6 +11,7 @@ public class ApplicationModel {
 	public SortedListOf<ContactData> contacts;
 
 	public SortedListOf<GroupData> getGroups() {
+		
 		return groups;
 
 	}

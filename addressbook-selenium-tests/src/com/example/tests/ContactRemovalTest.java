@@ -29,7 +29,20 @@ public class ContactRemovalTest extends TestBase {
 
 		// compare
 
-		assertThat(newList, equalTo(oldList.without(index)));
+		if (wantToCheck()) {
+			if ("yes".equals(app.getProperty("check.db"))) {
+
+				assertThat(app.getModel().getContacts(), equalTo(app
+						.getHibernateHelper().listContacts()));
+
+			}
+			if ("yes".equals(app.getProperty("check.ui"))) {
+
+				assertThat(app.getModel().getContacts(), equalTo(app
+						.getContactHelper().getUIContacts()));
+
+			}
+		}
 
 	}
 	

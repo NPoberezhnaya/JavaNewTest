@@ -26,7 +26,7 @@ public class GroupModificationTests extends TestBase {
 		SortedListOf<GroupData> newList = app.getModel().getGroups();
 		// compare
 
-		assertThat(newList, equalTo(oldList.without(index).withAdded(group)));
+	
 //////
 		if (wantToCheck()) {
 			if ("yes".equals(app.getProperty("check.db"))) {

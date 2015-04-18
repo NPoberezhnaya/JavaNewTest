@@ -31,12 +31,13 @@ public class GroupCreationTests extends TestBase {
 		app.getGroupHelper().createGroup(group);
 
 		// save new state
+	
 		SortedListOf<GroupData> newList = app.getModel().getGroups();
 
 		// compare states
 
-		assertThat(newList, equalTo(oldList.withAdded(group)));
-
+		
+	
 		if (wantToCheck()) {
 			if ("yes".equals(app.getProperty("check.db"))) {
 

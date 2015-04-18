@@ -89,6 +89,7 @@ public class ContactHelper extends WebDriverHelperBase {
 	public ContactHelper deleteContact(int index) {
 		initContactModification(index).sumbitContactRemoval().openMainPage()
 				.rebuildCash();
+		manager.getModel().removeContact(index);
 		return this;
 	}
 
@@ -122,31 +123,40 @@ public class ContactHelper extends WebDriverHelperBase {
 	}
 
 	public ContactHelper openMainPage() {
-		manager.getDriver().get(manager.baseUrl);
+	
+	manager.getDriver().get(manager.baseUrl);
 		return this;
 	}
-	public  SortedListOf<ContactData>  getUIContacts() {
-		SortedListOf<ContactData>  contacts = new SortedListOf<ContactData>();
+
+	public SortedListOf<ContactData> getUIContacts() {
+		SortedListOf<ContactData> contacts = new SortedListOf<ContactData>();
 		manager.navigateTo().mainPage();
+		
 		List<WebElement> checkboxes = driver
 				.findElements(By.name("selected[]"));
+		
 		for (WebElement checkbox : checkboxes) {
 
 			String title = checkbox.getAttribute("title");
 			String name = title.substring("Select (".length(), title.length()
 					- ")".length());
-			System.out.println(name);
-			contacts.add(new ContactData().withFirstName(name));
-
-
+			name = title.substring(title.indexOf(" ") + 1, title.length());
+			name = name.substring(name.indexOf(" ") + 1, (name.indexOf(")")));
+		
+			contacts.add(new ContactData().withName(name));
+			
 		}
+		
+		
 		return contacts;
 
 	}
+
 	public ContactHelper createContact(ContactData contact) {
 		openMainPage().initContactCreation().fillContactForm(contact, CREATION)
 				.sumbitContactCreation().rebuildCash();
-
+		// update model
+		manager.getModel().addContact(contact);
 		return this;
 
 	}
@@ -154,7 +164,8 @@ public class ContactHelper extends WebDriverHelperBase {
 	public ContactHelper modifyContact(int index, ContactData contact) {
 		openMainPage();
 		initContactModification(index).fillContactForm(contact, MODIFICATION)
-				.sumbitContactModification().openMainPage().rebuildCash();
+				.sumbitContactModification().openMainPage();
+		manager.getModel().removeContact(index).addContact(contact);
 		return this;
 
 	}

@@ -17,7 +17,7 @@ public class ApplicationManager {
 	private Properties properties;
 	private HibernateHelper hibernateHelper;
 	private ApplicationModel model;
-	
+
 	public ApplicationManager(Properties properties) {
 		this.properties = properties;
 		model = new ApplicationModel();
@@ -30,8 +30,8 @@ public class ApplicationManager {
 		driver.quit();
 
 	}
-	
-	public ApplicationModel getModel(){
+
+	public ApplicationModel getModel() {
 		return model;
 	}
 
@@ -63,10 +63,10 @@ public class ApplicationManager {
 		return hibernateHelper;
 	}
 
-	public String getProperty(String key){
+	public String getProperty(String key) {
 		return properties.getProperty(key);
 	}
-	
+
 	public WebDriver getDriver() {
 		String browser = properties.getProperty("browser");
 		if (driver == null) {

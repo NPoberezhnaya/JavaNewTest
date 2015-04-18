@@ -31,7 +31,7 @@ public class NavigationHelper extends WebDriverHelperBase {
 
 	public void mainPage() {
 		if (! onMainPage()) {
-			driver.get(manager.baseUrl + "/addressbookv4.1.4/");
+			driver.get(manager.baseUrl);
 			click(By.linkText("home"));
 		}
 	}

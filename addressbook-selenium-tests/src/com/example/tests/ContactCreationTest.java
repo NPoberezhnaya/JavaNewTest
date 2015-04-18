@@ -37,7 +37,6 @@ public class ContactCreationTest extends TestBase {
 		SortedListOf<ContactData> newList = app.getModel().getContacts();
 
 		// compare
-		assertThat(newList, equalTo(oldList.withAdded(contact)));
 
 		if (wantToCheck()) {
 			if ("yes".equals(app.getProperty("check.db"))) {
@@ -54,4 +53,5 @@ public class ContactCreationTest extends TestBase {
 			}
 		}
 	}
+
 }
